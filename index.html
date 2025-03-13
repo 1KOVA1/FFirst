@@ -1,12 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>1 try</title>
+    <title>Розклад занять</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div>BOM</div>
+    <div class="container">
+        <h1>Розклад занять</h1>
+        <div id="week-indicator"></div>
+        <div class="timetable">
+            <!-- Перший тиждень -->
+            <div class="week" id="week1">
+                <h2 class="wname">Перший тиждень</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Час</th>
+                            <th>Понеділок</th>
+                            <th>Вівторок</th>
+                            <th>Середа</th>
+                            <th>Четвер</th>
+                            <th>П'ятниця</th>
+                            <th>Субота</th>
+                        </tr>
+                    </thead>
+                    <tbody id="week1-body">
+                        <!-- Рядки розкладу будуть додані через JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Другий тиждень -->
+            <div class="week" id="week2">
+                <h2 class="wname">Другий тиждень</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Час</th>
+                            <th>Понеділок</th>
+                            <th>Вівторок</th>
+                            <th>Середа</th>
+                            <th>Четвер</th>
+                            <th>П'ятниця</th>
+                            <th>Субота</th>
+                        </tr>
+                    </thead>
+                    <tbody id="week2-body">
+                        <!-- Рядки розкладу будуть додані через JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

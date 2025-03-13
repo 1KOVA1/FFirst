@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.timetable {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.week {
+    flex: 1;
+}
+
+.wname {
+   /* margin: auto;*/
+    padding: 0%;
+   /* text-align: left;*/
+    margin-left: 100px;
+
+}
+
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #f8f8f8;
+}
+
+.current-week {
+    border: 5px solid #007bff ;
+    border-radius: 30px;
+}
+
+.current-class {
+    background-color: #007bff;
+    color: white;
+}
+
+#week-indicator {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #007bff;
+}

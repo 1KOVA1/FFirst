@@ -1,0 +1,74 @@
+// Дані для розкладу (легко змінювати)
+const scheduleData = {
+    week1: {
+        times: ["08:30", "10:25", "12:20", "14:15"],
+        days: {
+            Понеділок: ["", "Основи цифрової схемотехніки", "Проектування інформаційних систем. Частина 2. Web-програмування (Лек)", ""],
+            Вівторок: ["", "Проектування інформаційних систем. Частина 2. Web-програмування (Лаба)", "Основи цифрової схемотехніки (Прак)", "Робототехніка (Прак)"],
+            Середа: ["", "Основи підприємницької діяльності", "Естетика промислового дизайну, Логіка (Прак)", "Технологічні вимірювання та прилади. Частина 2. Засоби вимірювання (Прак)"],
+            Четвер: ["", "Проектування систем автоматизації (Лек)", "Метрологія(Лек)", "Метрологія(Прак)"],
+            Пʼятниця: ["", "", "Проектування систем автоматизації (Прак)", "English"],
+            Субота: ["", "", "", ""]
+        }
+    },
+    week2: {
+        times: ["08:30", "10:25", "12:20", "14:15"],
+        days: {
+            Понеділок: ["", "Основи цифрової схемотехніки (Лек)", "Проектування інформаційних систем. Частина 2. Web-програмування (Лек)", ""],
+            Вівторок: ["", "Проектування інформаційних систем. Частина 2. Web-програмування (Лек)", "Основи цифрової схемотехніки (Прак)", "Робототехніка (Лаба-!!!)"],
+            Середа: ["Основи підприємницької діяльності", "Ефективна презентація, Логіка, Візуалізація даних (Прак)", "Технологічні вимірювання та прилади. Частина 2. Засоби вимірювання (Лек)", "Технологічні вимірювання та прилади. Частина 2. Засоби вимірювання (Лаб)"],
+            Четвер: ["Робототехніка (Лекція)", "Проектування систем автоматизації (Лек)", "Метрологія(Лек)", "Метрологія(Прак)"],
+            Пʼятниця: ["", "Екологічна безпека інженерної діяльності (Прак)", "Проектування систем автоматизації (Прак)", "English"],
+            Субота: ["", "", "", ""]
+        }
+    }
+};
+
+// Функція для створення розкладу
+function createSchedule(weekData, tableBodyId) {
+    const tableBody = document.getElementById(tableBodyId);
+    const times = weekData.times;
+    const days = weekData.days;
+
+    times.forEach((time, index) => {
+        const row = document.createElement("tr");
+        const timeCell = document.createElement("td");
+        timeCell.textContent = time;
+        row.appendChild(timeCell);
+
+        Object.values(days).forEach(day => {
+            const cell = document.createElement("td");
+            cell.textContent = day[index];
+            row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+    });
+}
+
+// Функція для визначення поточного тижня
+function getCurrentWeek() {
+    const today = new Date();
+    const startDate = new Date('2023-10-01'); // Початкова дата для розрахунку тижнів
+    const diffTime = Math.abs(today - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const currentWeek = Math.floor(diffDays / 7) % 2 + 1; // 1 або 2 тиждень
+    return currentWeek;
+}
+
+// Показуємо поточний тиждень
+function showCurrentWeek() {
+    const weekIndicator = document.getElementById('week-indicator');
+    const currentWeek = getCurrentWeek();
+    weekIndicator.textContent = `Зараз ${currentWeek} тиждень`;
+
+    // Підсвічуємо поточний тиждень
+    document.getElementById(`week${currentWeek}`).classList.add('current-week');
+}
+
+// Запускаємо функції при завантаженні сторінки
+window.onload = function () {
+    createSchedule(scheduleData.week1, 'week1-body');
+    createSchedule(scheduleData.week2, 'week2-body');
+    showCurrentWeek();
+};

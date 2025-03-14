@@ -73,3 +73,9 @@ th {
     margin-bottom: 20px;
     color: #007bff;
 }
+
+
+.active-class {
+    background-color: #28a745; /* Зелений колір для поточного предмета */
+    color: white;
+}

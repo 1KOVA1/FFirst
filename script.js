@@ -49,8 +49,8 @@ function createSchedule(weekData, tableBodyId) {
 // Функція для визначення поточного тижня
 function getCurrentWeek() {
     const today = new Date();
-    const startDate = new Date('2023-10-01'); // Початкова дата для розрахунку тижнів
-    const diffTime = Math.abs(today - startDate);
+    const startDate = new Date('2025-03-7'); // Початкова дата для розрахунку тижнів
+    const diffTime = today - startDate;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     const currentWeek = Math.floor(diffDays / 7) % 2 + 1; // 1 або 2 тиждень
     return currentWeek;
@@ -66,9 +66,42 @@ function showCurrentWeek() {
     document.getElementById(`week${currentWeek}`).classList.add('current-week');
 }
 
+// Функція для підсвітки поточного предмета
+function highlightCurrentClass() {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 (неділя) - 6 (субота)
+    const hours = today.getHours();
+    const minutes = today.getMinutes();
+
+    if (dayOfWeek >= 1 && dayOfWeek <= 6) { // З понеділка по суботу
+        const currentWeek = getCurrentWeek();
+        const rows = document.querySelectorAll(`#week${currentWeek} table tbody tr`);
+
+        rows.forEach(row => {
+            const timeCell = row.cells[0];
+            const timeText = timeCell.textContent.trim(); // Отримуємо текст часу та видаляємо зайві пробіли
+
+            // Перевіряємо, чи час вказано у правильному форматі (наприклад, "08:30 - 10:25")
+            if (timeText && timeText.includes(' - ')) {
+                const [startTime, endTime] = timeText.split(' - ');
+                const [startHour, startMinute] = startTime.split(':').map(Number);
+                const [endHour, endMinute] = endTime.split(':').map(Number);
+
+                // Перевіряємо, чи поточний час потрапляє в інтервал заняття
+                if (hours > startHour || (hours === startHour && minutes >= startMinute)) {
+                    if (hours < endHour || (hours === endHour && minutes <= endMinute)) {
+                        row.cells[dayOfWeek].classList.add('active-class');
+                    }
+                }
+            }
+        });
+    }
+}
+
 // Запускаємо функції при завантаженні сторінки
 window.onload = function () {
     createSchedule(scheduleData.week1, 'week1-body');
     createSchedule(scheduleData.week2, 'week2-body');
     showCurrentWeek();
+    highlightCurrentClass(); // Додано виклик функції для підсвітки
 };

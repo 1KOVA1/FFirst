@@ -44,18 +44,16 @@ function createSchedule(weekData, tableBodyId) {
 
         tableBody.appendChild(row);
     });
-}
+} 
 
 // Функція для визначення поточного тижня
-function getCurrentWeek() {
-    const today = new Date();
-    const startDate = new Date('2025-03-7'); // Початкова дата для розрахунку тижнів
-    const diffTime = today - startDate;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    const currentWeek = Math.floor(diffDays / 7) % 2 + 1; // 1 або 2 тиждень
-    return currentWeek;
+function getCurrentWeek(d) {
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+    var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+    return weekNo;
 }
-
 // Показуємо поточний тиждень
 function showCurrentWeek() {
     const weekIndicator = document.getElementById('week-indicator');
